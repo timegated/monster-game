@@ -70,18 +70,13 @@ function attackHandler() {
 function strongAttackHandler() {
     attackMonster('STRONG_ATTACK');
 }
+
 function createMonsterHealthDisplay(value) {
     let monsterTag = document.querySelector('.MONSTER')
-    // console.log(monsterTag)
-    let display = document.createTextNode(value)
-    monsterTag.append(display)
+    let healthDisplay = document.createElement('H5')
+    healthDisplay.innerText = `Monster Health:${ value }`;
+    monsterTag.insertAdjacentElement('afterend', healthDisplay)
 }
-// function createMonsterHealthDisplay(value) {
-//     let monsterTag = document.querySelector('.MONSTER')
-//     let healthDisplay = document.createElement('H5')
-//     healthDisplay.innerText = `Monster Health:${ value }`;
-//     monsterTag.insertAdjacentElement('afterend', healthDisplay)
-// }
 
 function createPlayerHealthDisplay(value) {
     let playerTag = document.querySelector('.PLAYER')
@@ -89,8 +84,6 @@ function createPlayerHealthDisplay(value) {
     let healthDisplay = document.createElement('H5')
     healthDisplay.innerText = `Player Health:${ value }`
     playerTag.insertAdjacentElement('afterend', healthDisplay)
-
-
 }
 
 function healthSelection() {
@@ -105,9 +98,15 @@ function healthSelection() {
     let setHealth = document.querySelector('.health')
     console.log(setHealth)
     setHealth.addEventListener('click', function (event) {
+        let disableButton = document.querySelectorAll('.healthButton')
         createMonsterHealthDisplay(event.target.value)
         createPlayerHealthDisplay(event.target.value)
         resetGame(event.target.value)
+        console.log(disableButton)
+       
+        for (let item of disableButton) {
+            item.disabled = true;
+        }
     })
 
 
