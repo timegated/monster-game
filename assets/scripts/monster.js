@@ -74,7 +74,7 @@ function strongAttackHandler() {
 function createMonsterHealthDisplay(value) {
     let monsterTag = document.querySelector('.MONSTER')
     let healthDisplay = document.createElement('H5')
-    healthDisplay.innerText = value;
+    healthDisplay.innerText = `Monster Health:${ value }`;
     monsterTag.insertAdjacentElement('afterend', healthDisplay)
 }
 
@@ -82,7 +82,7 @@ function createPlayerHealthDisplay(value) {
     let playerTag = document.querySelector('.PLAYER')
     console.log(playerTag)
     let healthDisplay = document.createElement('H5')
-    healthDisplay.innerText = value
+    healthDisplay.innerText = `Player Health:${ value }`
     playerTag.insertAdjacentElement('afterend', healthDisplay)
 
 
@@ -103,7 +103,6 @@ function healthSelection() {
         createMonsterHealthDisplay(event.target.value)
         createPlayerHealthDisplay(event.target.value)
         resetGame(event.target.value)
-
     })
 
 
