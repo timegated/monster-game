@@ -70,13 +70,18 @@ function attackHandler() {
 function strongAttackHandler() {
     attackMonster('STRONG_ATTACK');
 }
-
 function createMonsterHealthDisplay(value) {
     let monsterTag = document.querySelector('.MONSTER')
-    let healthDisplay = document.createElement('H5')
-    healthDisplay.innerText = `Monster Health:${ value }`;
-    monsterTag.insertAdjacentElement('afterend', healthDisplay)
+    // console.log(monsterTag)
+    let display = document.createTextNode(value)
+    monsterTag.append(display)
 }
+// function createMonsterHealthDisplay(value) {
+//     let monsterTag = document.querySelector('.MONSTER')
+//     let healthDisplay = document.createElement('H5')
+//     healthDisplay.innerText = `Monster Health:${ value }`;
+//     monsterTag.insertAdjacentElement('afterend', healthDisplay)
+// }
 
 function createPlayerHealthDisplay(value) {
     let playerTag = document.querySelector('.PLAYER')
