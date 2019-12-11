@@ -3,17 +3,12 @@ const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 15;
 const HEALTH_SELECT = [100, 150, 200, 250]
-let chosenMaxLife = 100;
-let currentMonsterHealth = chosenMaxLife;
-let currentPlayerHealth = chosenMaxLife;
 let bonusLife = true;
-
-adjustHealthBars(chosenMaxLife);
 
 function healPlayerHandler() {
     let healValue;
     if (currentPlayerHealth >= chosenMaxLife - HEAL_VALUE) {
-        alert("You can't heal to more than your max initial health.");
+        console.log("You can't heal to more than your max initial health.");
         healValue = chosenMaxLife - currentPlayerHealth;
     } else {
         healValue = HEAL_VALUE;
@@ -32,31 +27,33 @@ function attackMonster(mode) {
     }
     const damage = dealMonsterDamage(maxDamage);
     currentMonsterHealth -= damage;
+    console.error(`There is a problem with scope with currentMonsterHealth: ${currentMonsterHealth}`)
+    
     endTurn()
 }
-
+// Resets health values
 function reset() {
-    currentPlayerHealth = chosenMaxLife;
+    currentMonsterHealth = chosenMaxLife;
     currentPlayerHealth = chosenMaxLife;
     resetGame();
 }
-
+//Win and loss conditions set for the game
 function endTurn() {
     const initialPlayerHealth = currentPlayerHealth
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
     if (currentPlayerHealth <= 0 && bonusLife) {
         bonusLife = false;
-        alert('you would be dead but you have a bonus life!')
+        console.log('you would be dead but you have a bonus life!')
         removeBonusLife();
         setPlayerHealth(initialPlayerHealth);
     }
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
-        alert('You won!');
+        console.log('You won!');
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
-        alert('You lost!');
+        console.log('You lost!');
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
-        alert('You have a draw!');
+        console.log('You have a draw!');
     }
     if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
         reset();
@@ -80,7 +77,6 @@ function createMonsterHealthDisplay(value) {
 
 function createPlayerHealthDisplay(value) {
     let playerTag = document.querySelector('.PLAYER')
-    console.log(playerTag)
     let healthDisplay = document.createElement('H5')
     healthDisplay.innerText = `Player Health:${ value }`
     playerTag.insertAdjacentElement('afterend', healthDisplay)
@@ -96,14 +92,15 @@ function healthSelection() {
         health[0].appendChild(button)
     }
     let setHealth = document.querySelector('.health')
-    console.log(setHealth)
     setHealth.addEventListener('click', function (event) {
+        let chosenMaxLife = parseInt(event.target.value)
+        let currentMonsterHealth = chosenMaxLife;
+        let currentPlayerHealth = chosenMaxLife;
         let disableButton = document.querySelectorAll('.healthButton')
+        adjustHealthBars(chosenMaxLife);
         createMonsterHealthDisplay(event.target.value)
         createPlayerHealthDisplay(event.target.value)
-        resetGame(event.target.value)
-        console.log(disableButton)
-       
+        resetGame(event.target.value)       
         for (let item of disableButton) {
             item.disabled = true;
         }
