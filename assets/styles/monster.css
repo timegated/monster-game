@@ -15,7 +15,6 @@ progress {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 80%;
     height: 2rem;
     color: #ff0062;
     border: 1px solid #a927f5;
@@ -61,17 +60,11 @@ button:active {
 #health-levels,
 #controls {
     margin: 2rem auto;
-    width: 50rem;
     text-align: center;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 3em;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     background: white;
-}
-
-#controls {
-    display: flex;
-    flex-direction: column;
 }
 
 #bonus-life {
@@ -88,17 +81,29 @@ button:active {
 .gameDisplay {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .selection {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background: white;
     border-radius: 25px;
+    padding: 4em;
 }
 
 .selection .health>button {
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .gameDisplay {
+        flex-direction: column;
+        width: 100%;
+    }
 }
