@@ -6,8 +6,9 @@ const strongAttackBtn = document.getElementById('strong-attack-btn');
 const healBtn = document.getElementById('heal-btn');
 const logBtn = document.getElementById('log-btn');
 const health = document.getElementsByClassName('health')
-
-console.log(health)
+const win = document.querySelector('.win');
+const lose = document.querySelector('.lose');
+const draw = document.querySelector('.draw');
 
 function adjustHealthBars(maxLife) {
     monsterHealthBar.max = maxLife;
@@ -17,9 +18,8 @@ function adjustHealthBars(maxLife) {
 }
 
 function dealMonsterDamage(damage) {
-    const dealtDamage = parseFloat(Math.random(), 2) * damage;
+    const dealtDamage = Math.random() * damage;
     monsterHealthBar.value = +monsterHealthBar.value - dealtDamage;
-    console.log(monsterHealthBar)
     return dealtDamage;
 }
 
